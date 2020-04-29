@@ -5,10 +5,7 @@ import { getCurrentEvent, getNextEvent } from "./timetable";
 import moment from "moment";
 
 const getEventBackgroundColour = (props) => {
-  console.log(props);
   return props !== null && props.event.lesson ? "#88ff88" : "#ffff88";
-  //   return props.description.startsWith("Lesson: ") ? "yellow" : "#88ff88";
-  //   return "yellow";
 };
 
 const EventContainer = styled.div`
@@ -51,18 +48,39 @@ const NextTimeDisplay = ({ event }) => {
   );
 };
 
-export const CurrentEvent = () => {
-  const now = moment();
-  const currentEvent = getCurrentEvent(now);
-  const nextEvent = getNextEvent(now);
-  return (
-    <div>
-      <EventContainer event={currentEvent}>
-        <CurrentTimeDisplay event={currentEvent} />
-      </EventContainer>
-      <EventContainer event={nextEvent}>
-        <NextTimeDisplay event={nextEvent} />
-      </EventContainer>
-    </div>
-  );
-};
+export class CurrentEvent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { date: new Date() };
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 60 * 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date(),
+    });
+  }
+
+  render() {
+    const now = moment(this.state.date);
+    const currentEvent = getCurrentEvent(now);
+    const nextEvent = getNextEvent(now);
+    return (
+      <div>
+        <EventContainer event={currentEvent}>
+          <CurrentTimeDisplay event={currentEvent} />
+        </EventContainer>
+        <EventContainer event={nextEvent}>
+          <NextTimeDisplay event={nextEvent} />
+        </EventContainer>
+      </div>
+    );
+  }
+}
