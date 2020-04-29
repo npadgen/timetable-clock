@@ -6,12 +6,13 @@ import { CurrentEvent } from "./current-event/CurrentEvent";
 
 const AppContainer = styled.div`
   margin: 1rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "BioRhyme", serif;
   color: #222222;
 `;
 
 const ClockContainer = styled.div`
   text-align: right;
+  color: #aaaaaa;
 `;
 
 const App = () => (
@@ -19,11 +20,7 @@ const App = () => (
     <ClockContainer>
       <Clock format={"h:mm:ss a"} ticking={true} />
     </ClockContainer>
-    <CurrentEvent
-      start="10:00"
-      end="11:00"
-      description="Lesson: React training"
-    />
+    <CurrentEvent />
   </AppContainer>
 );
 
