@@ -5,7 +5,7 @@ import { getCurrentEvent, getNextEvent } from "./timetable";
 import moment from "moment";
 
 const getEventBackgroundColour = (props) => {
-  return props !== null && props.event.lesson ? "#88ff88" : "#ffff88";
+  return props.event !== null && props.event.lesson ? "#88ff88" : "#ffff88";
 };
 
 const EventContainer = styled.div`
@@ -16,11 +16,15 @@ const EventContainer = styled.div`
   box-shadow: 0 4px 8px grey;
   text-align: center;
   background-color: ${(props) => getEventBackgroundColour(props)};
+  display: ${(props) => (props.event == null ? "none" : "block")};
 `;
 
 const formatTime = (timeStr) => moment(timeStr, "HH:mm").format("h:mm");
 
 const CurrentTimeDisplay = ({ event }) => {
+  if (event == null) {
+    return null;
+  }
   return (
     <div>
       <ReactFitText compressor={0.8}>
@@ -36,6 +40,9 @@ const CurrentTimeDisplay = ({ event }) => {
 };
 
 const NextTimeDisplay = ({ event }) => {
+  if (event == null) {
+    return null;
+  }
   return (
     <div>
       <ReactFitText compressor={1.5}>
