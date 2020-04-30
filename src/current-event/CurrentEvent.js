@@ -17,7 +17,6 @@ const EventContainer = styled.div`
   position: relative;
   box-shadow: 0 4px 8px grey;
   text-align: center;
-  max-height: 18rem;
   background-color: ${(props) => getEventBackgroundColour(props)};
   display: ${(props) => (props.event == null ? "none" : "block")};
 `;
