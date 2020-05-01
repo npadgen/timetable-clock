@@ -4,6 +4,7 @@
   "description": "Display a clock and a summary of the current event on a calendar",
   "main": "index.js",
   "scripts": {
+    "build": "npx webpack --mode development",
     "dev": "npx webpack-dev-server --mode development",
     "test": "mocha \"src/**/*.test.js\" --require @babel/register --recursive"
   },

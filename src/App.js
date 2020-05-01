@@ -21,15 +21,20 @@ const ClockContainer = styled.div`
 `;
 
 const MuteButton = styled.button`
+  margin-top: 8px;
+  padding: 16px;
+  position: relative;
+  box-shadow: 0 4px 8px grey;
+  text-align: center;
+
   font-size: 16px;
   padding: 8px;
-  margin: 2px;
   border: none;
   border-radius: 8px;
   outline: none;
   cursor: pointer;
   display: inline-block;
-  float: left;
+  text-align: center;
 `;
 
 const unmute = () => {
@@ -41,13 +46,17 @@ const unmute = () => {
 const App = () => (
   <AppContainer>
     <div id="sound-container"></div>
-    <MuteButton id="muteButton" onClick={unmute}>
-      <i class="fas fa-bell-slash"></i>
-    </MuteButton>
     <ClockContainer>
       <Clock format={"h:mm:ss a"} ticking={true} />
     </ClockContainer>
     <CurrentEvent />
+    <div style={{ "text-align": "center" }}>
+      <MuteButton id="muteButton" onClick={unmute}>
+        <i style={{ "font-size": "50px" }} class="fas fa-bell-slash"></i>
+        <br />
+        Please click here to enable the bell sound
+      </MuteButton>
+    </div>
   </AppContainer>
 );
 
