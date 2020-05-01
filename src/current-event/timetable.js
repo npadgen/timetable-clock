@@ -88,3 +88,12 @@ export const getNextEvent = (currentMoment) => {
   }
   return timetable[today][index];
 };
+
+export const screenShouldBeDark = (currentMoment) => {
+  const today = currentMoment.format("dddd");
+  return (
+    !(today in timetable) ||
+    currentMoment.hour() >= 20 ||
+    currentMoment.hour() < 7
+  );
+};

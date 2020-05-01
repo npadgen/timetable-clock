@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import ReactFitText from "react-fittext";
-import { getCurrentEvent, getNextEvent } from "./timetable";
+import { getCurrentEvent, getNextEvent, screenShouldBeDark } from "./timetable";
 import moment from "moment";
 import Sound from "react-sound";
 
@@ -70,12 +70,21 @@ const NextTimeDisplay = ({ event }) => {
 };
 
 export const renderSound = () => {
-  console.log("Yay");
   const soundContainer = document.getElementById("sound-container");
   console.log(soundContainer);
   if (soundContainer) {
     ReactDOM.render(<BellSound />, soundContainer);
   }
+};
+
+export const renderBackground = (backgroundIsDark) => {
+  console.log(`setting dark background to ${backgroundIsDark}`);
+  document
+    .getElementById("body")
+    .setAttribute(
+      "style",
+      `background-color: ${backgroundIsDark ? "black" : "white"}`
+    );
 };
 
 export class CurrentEvent extends React.Component {
@@ -84,6 +93,7 @@ export class CurrentEvent extends React.Component {
     this.state = {
       date: new Date(),
       currentEvent: {},
+      backgroundIsDark: null,
     };
   }
 
@@ -108,6 +118,11 @@ export class CurrentEvent extends React.Component {
     if (this.state.currentEvent !== currentEvent) {
       this.setState({ currentEvent: currentEvent });
       renderSound();
+    }
+    const backgroundIsDark = screenShouldBeDark(now);
+    if (this.state.backgroundIsDark !== backgroundIsDark) {
+      this.setState({ backgroundIsDark: backgroundIsDark });
+      renderBackground(backgroundIsDark);
     }
     return (
       <div>

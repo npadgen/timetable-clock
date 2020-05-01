@@ -1,5 +1,9 @@
 import { expect } from "chai";
-import { getCurrentEvent, getNextEvent } from "../timetable";
+import {
+  getCurrentEvent,
+  getNextEvent,
+  screenShouldBeDark,
+} from "../timetable";
 import moment from "moment";
 
 describe("Get current events", () => {
@@ -11,11 +15,11 @@ describe("Get current events", () => {
 
     expect(actual).to.equal(expected);
   });
-  it('Returns "registration" at 9:00 on Monday', () => {
+  it('Returns "Regi&shy;stration" at 9:00 on Monday', () => {
     const t = moment("Monday 09:00", "dddd HH:mm");
 
     const expected = {
-      text: "Registration",
+      text: "Regi&shy;stration",
     };
     const actual = getCurrentEvent(t);
 
@@ -58,31 +62,31 @@ describe("Get next events", () => {
 
     expect(actual).to.equal(expected);
   });
-  it('Returns "Lesson 1" at 9:00 on Monday', () => {
+  it('Returns "PSHE" at 9:00 on Monday', () => {
     const t = moment("Monday 09:00", "dddd HH:mm");
 
     const expected = {
-      text: "Lesson 1",
+      text: "PSHE",
     };
     const actual = getNextEvent(t);
 
     expect(actual.text).to.equal(expected.text);
   });
-  it('Returns "Lesson 4" at lunchtime on Wednesday', () => {
+  it('Returns "Geography" at lunchtime on Wednesday', () => {
     const t = moment("Monday 13:00", "dddd HH:mm");
 
     const expected = {
-      text: "Lesson 4",
+      text: "Geography",
     };
     const actual = getNextEvent(t);
 
     expect(actual.text).to.equal(expected.text);
   });
-  it('Returns "Registration" at the beginning of Thursday', () => {
+  it('Returns "Regi&shy;stration" at the beginning of Thursday', () => {
     const t = moment("Thursday 07:00", "dddd HH:mm");
 
     const expected = {
-      text: "Registration",
+      text: "Regi&shy;stration",
     };
     const actual = getNextEvent(t);
 
@@ -93,6 +97,41 @@ describe("Get next events", () => {
 
     const expected = null;
     const actual = getNextEvent(t);
+
+    expect(actual).to.equal(expected);
+  });
+});
+
+describe("Background is dark at night and weekends", () => {
+  it("Background is dark at weekends (when there are no events)", () => {
+    const t = moment("Saturday 12:00", "dddd HH:mm");
+
+    const expected = true;
+    const actual = screenShouldBeDark(t);
+
+    expect(actual).to.equal(expected);
+  });
+  it("Background is dark at night", () => {
+    const t = moment("Wednesday 21:00", "dddd HH:mm");
+
+    const expected = true;
+    const actual = screenShouldBeDark(t);
+
+    expect(actual).to.equal(expected);
+  });
+  it("Background is dark in early morning", () => {
+    const t = moment("Wednesday 04:00", "dddd HH:mm");
+
+    const expected = true;
+    const actual = screenShouldBeDark(t);
+
+    expect(actual).to.equal(expected);
+  });
+  it("Background is bright in the school day", () => {
+    const t = moment("Wednesday 12:00", "dddd HH:mm");
+
+    const expected = false;
+    const actual = screenShouldBeDark(t);
 
     expect(actual).to.equal(expected);
   });
