@@ -3,6 +3,8 @@ Display a clock and a summary of the current and next events on a weekly calenda
 
 This is designed to be run on an 800x480 display such as a HyperPixel 4.0" for a Raspberry Pi.
 
+![Picture of timetable-clock running on my Pi](https://github.com/npadgen/timetable-clock/blob/master/assets/IMG_8776.jpeg?raw=true)
+
 ## Running the program
 
 * Clone this repo
