@@ -1,0 +1,9 @@
+#!/bin/bash
+
+d=$(dirname $0)
+if [ "$d" = "" ] ; then
+	d=.
+fi
+
+cd $d
+exec npm run dev
