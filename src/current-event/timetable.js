@@ -36,7 +36,8 @@ export const timetable = {
   ],
   Thursday: [
     { start: "08:40", end: "09:05", text: "Regi&shy;stration", lesson: false },
-    { start: "09:05", end: "11:00", text: "Techn&shy;ology", lesson: true },
+    { start: "09:05", end: "10:10", text: "Techn&shy;ology", lesson: true },
+    { start: "10:30", end: "11:00", text: "Techn&shy;ology", lesson: true },
     { start: "11:00", end: "11:30", text: "Piano", lesson: true },
     { start: "11:30", end: "11:40", text: "Break", lesson: false },
     { start: "11:40", end: "12:45", text: "Biology", lesson: true },
