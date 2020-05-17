@@ -98,7 +98,7 @@ export class CurrentEvent extends React.Component {
   }
 
   componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 60 * 1000);
+    this.timerID = setInterval(() => this.tick(), 30 * 1000);
   }
 
   componentWillUnmount() {
